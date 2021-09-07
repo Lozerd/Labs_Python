@@ -1,22 +1,54 @@
-import math
-# data = int(input('Enter temperature in Fahrenheit: '))
-# print("Temperature in Celsius: {:2}".format(((data * 9) / 5) + 32))
+import pygame as py
 
-expr = [int(item) for item in input("Enter data with space: \"height\" \"bottom base\" \"top base\": ").split(" ")]
-print(f"The area is: {0.5 * (expr[1] + expr[2]) * expr[0]}")
+# define constants
+WIDTH = 500
+HEIGHT = 500
+FPS = 30
 
-radius1 = int(input("Enter radius1: "))
-print(f"Aree of a circle: {math.pi * pow(radius1, 2)}")
+# define colors
+BLACK = (0 , 0 , 0)
+GREEN = (0 , 255 , 0)
 
-radius2 = int(input("Enter radius2: "))
-print(f"Area of an eclipse: {math.pi * radius1 * radius2}")
+# initialize pygame and create screen
+py.init()
+screen = py.display.set_mode((WIDTH , HEIGHT))
+# for setting FPS
+clock = py.time.Clock()
 
-height = int(input("Enter height: "))
-print(f"Area of an equilateral triangle: {(pow(height, 2) * math.sqrt(3)) / 3}")
+rot = 45
+rot_speed = 0
 
-print(f"Volume of a cone: {(math.pi * pow(radius1, 2) * height) / 3}")
-print(f"Volume of a sphere: {(4 * math.pi * pow(radius1, 3)) / 3}")
 
-variables = [int(item) for item in input("Enter variables with space: \"a\" \"b\" \"C\" ").split(' ')]
-print(f"Area of an arbitrary triangle: {0.5 * variables[0] * variables[1] * math.sin(variables[2])}")
-# math.sin()
+image_orig = py.Surface((100 , 50))
+image_orig.set_colorkey(BLACK)
+image_orig.fill(GREEN)
+rect = image_orig.get_rect()
+rect.center = (WIDTH // 2 , HEIGHT // 2)
+
+running = True
+while running:
+    # set FPS
+    clock.tick(FPS)
+    # clear the screen every time before drawing new objects
+    screen.fill(BLACK)
+    # check for the exit
+    for event in py.event.get():
+        if event.type == py.QUIT:
+            running = False
+
+    # making a copy of the old center of the rectangle
+    old_center = rect.center
+    # rotating the orignal image
+    print(1, rect.center, old_center)
+
+    new_image = py.transform.rotate(image_orig , 45)
+    rect = new_image.get_rect()
+    # set the rotated rectangle to the old center
+    print(rect.center, old_center)
+    rect.center = old_center
+    # drawing the rotated rectangle to the screen
+    screen.blit(new_image , rect)
+    # flipping the display after drawing everything
+    py.display.flip()
+
+py.quit()
