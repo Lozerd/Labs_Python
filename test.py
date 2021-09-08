@@ -4,6 +4,9 @@ import pygame
 
 pygame.init()
 pygame.font.init()
+
+NINTENDO_FONT = pygame.font.Font('fonts/Nintendo_Switch_UI_Font.ttf', 14)
+
 clock = pygame.time.Clock()
 
 WIDTH = 800
@@ -14,14 +17,21 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 BLUE = (0, 71, 179)
+GREEN = (0, 134, 83)
+YELLOW = (224, 180, 45)
 
 GRAY = (174, 174, 174)
 D_PAD_GRAY = (81, 82, 86)
 D_PAD_RECT_GRAY = (90, 91, 96)
+
+BUTTONS_CIRCLE_GRAY = (129, 134, 140)
 LIGHT_GRAY = (187, 188, 192)
+LIGHTER_GRAY = (194, 198, 201)
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Test app")
+
+buttons_text = pygame.font.SysFont("Times New Roman", 14)
 
 body = pygame.Rect(250, HEIGHT / 2 - 100, 250, 170)
 d_pad = pygame.Rect(190, HEIGHT / 2 - 55, 110, 110)
@@ -33,22 +43,23 @@ d_pad_inner_circle_invert = pygame.Rect(d_pad_inner_circle.centerx - 15, d_pad_i
 buttons_circle = pygame.Rect(WIDTH - 400, HEIGHT / 2 - 100, 200, 200)
 
 rotation = 45
-surface = pygame.Surface((50, 30))
+surface = pygame.Surface((50, 39))
 
 surface.set_colorkey(WHITE)
 surface.fill(LIGHT_GRAY)
 
 btn1_field = surface.get_rect()
-btn1_field.center = (500, 290)
+btn1_field.center = (480, 280)
 
 btn2_field = surface.get_rect()
-btn2_field.center = (540, 310)
+btn2_field.center = (517.5, 308.5)
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+
 
     screen.fill(WHITE)
 
@@ -66,6 +77,7 @@ while True:
     pygame.draw.rect(screen, GRAY, body)
     pygame.draw.line(screen, BLACK, body.topleft, body.topright, width=1)
     pygame.draw.ellipse(screen, D_PAD_GRAY, d_pad, width=2)
+    pygame.draw.circle(screen, BUTTONS_CIRCLE_GRAY, center=buttons_circle.center, radius=80)
     pygame.draw.circle(screen, BLACK, center=buttons_circle.center, radius=80, width=2)
 
     # d_pad
@@ -120,33 +132,50 @@ while True:
     pygame.draw.circle(screen, LIGHT_GRAY, center=(
         btn1_field.topright[0] - 12,
         btn1_field.topright[1] + 12
-    ), radius=15)
+    ), radius=20)
 
     pygame.draw.circle(screen, LIGHT_GRAY, center=(
         btn1_field.bottomleft[0] + 12,
         btn1_field.bottomleft[1] - 12
-    ), radius=15)
+    ), radius=20)
 
     pygame.draw.circle(screen, LIGHT_GRAY, center=(
         btn2_field.topright[0] - 12,
         btn2_field.topright[1] + 12
-    ), radius=15)
+    ), radius=20)
 
     pygame.draw.circle(screen, LIGHT_GRAY, center=(
         btn2_field.bottomleft[0] + 12,
         btn2_field.bottomleft[1] - 12
-    ), radius=15)
+    ), radius=20)
 
     # The buttons
     pygame.draw.circle(screen, BLUE, center=(
         btn1_field.topright[0] - 12,
         btn1_field.topright[1] + 12
-    ), radius=10)
+    ), radius=15)  # Blue
+
+    pygame.draw.circle(screen, GREEN, center=(
+        btn1_field.bottomleft[0] + 12,
+        btn1_field.bottomleft[1] - 12
+    ), radius=15)  # Green
+
+    pygame.draw.circle(screen, RED, center=(
+        btn2_field.topright[0] - 12,
+        btn2_field.topright[1] + 12
+    ), radius=15)  # RED
+
+    pygame.draw.circle(screen, YELLOW, center=(
+        btn2_field.bottomleft[0] + 12,
+        btn2_field.bottomleft[1] - 12
+    ), radius=15)  # YELLOW
 
     pygame.draw.rect(screen, BLACK, btn1_field, width=1)
     pygame.draw.line(screen, RED, btn1_field.center, btn1_field.center, width=3)
     pygame.draw.rect(screen, BLACK, btn2_field, width=1)
     pygame.draw.line(screen, RED, btn2_field.center, btn2_field.center, width=3)
+
+    screen.blit(NINTENDO_FONT.render("X", False, LIGHTER_GRAY), (btn1_field.topright[0] + 2.5, btn2_field.topright[1] - 42.5))
 
     pygame.display.flip()
     clock.tick(60)
