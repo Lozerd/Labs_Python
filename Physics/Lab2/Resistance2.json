@@ -1,0 +1,29 @@
+{
+  "Resistor1_Exp1": { "Rm": 1.18, "l1": 50, "l2": 50 },
+  "Resistor1_Exp2": { "Rm": 2.14, "l1": 40, "l2": 60 },
+  "Resistor1_Exp3": { "Rm": 0.77, "l1": 60, "l2": 40 },
+  "Resistor2_Exp1": { "Rm": 2.1, "l1": 50, "l2": 50 },
+  "Resistor2_Exp2": { "Rm": 3.18, "l1": 40, "l2": 60 },
+  "Resistor2_Exp3": { "Rm": 1.41, "l1": 60, "l2": 40 },
+  "Resistor3_Exp1": { "Rm": 3.2, "l1": 50, "l2": 50 },
+  "Resistor3_Exp2": { "Rm": 4.86, "l1": 40, "l2": 60 },
+  "Resistor3_Exp3": { "Rm": 2.16, "l1": 60, "l2": 40 },
+  "Resistor4_Exp1": { "Rm": 0.78, "l1": 50, "l2": 50 },
+  "Resistor4_Exp2": { "Rm": 1.17, "l1": 40, "l2": 60 },
+  "Resistor4_Exp3": { "Rm": 0.48, "l1": 60, "l2": 40 }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
